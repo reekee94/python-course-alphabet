@@ -75,12 +75,11 @@ class Cesar:
         return hit_hat(self) <= hit_hat(other)
 
     def add_car(self, car, garage=None):
-        if garage == None:
-            garage = max(self.garages, key=g.freeplaces for self.garages)
-        elif garage.freeplace > 0:
+        garage = garage or max(self.garages, key=lambda x: x.freeplaces)
+        if garage.freeplace > 0:
             garage.add(car)
         else:
-            print('No places free places in' garage)
+            print('No places free places in', garage)
 
 
 
