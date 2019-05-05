@@ -1,5 +1,5 @@
-import cProfile
 import argparse
+import cProfile
 
 from build_in_methods_iterators.lesson.profiler_examples.utils import list_comprehension, \
     iterate_throw_list_comprehension, loop_example, iterate_throw_list_loop, generator_comprehension, \

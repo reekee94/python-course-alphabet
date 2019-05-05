@@ -1,5 +1,5 @@
-import random
 import functools
+import random
 
 our_new_awesome_func = lambda x, y, c: x * y * c
 

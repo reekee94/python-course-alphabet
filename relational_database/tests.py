@@ -3,9 +3,8 @@ import os
 import unittest
 
 import psycopg2
-from psycopg2.extras import RealDictCursor
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-
+from psycopg2.extras import RealDictCursor
 from relational_database.config import TEST_DATABASE, DATABASE, FIXTURES_PATH
 from relational_database.db_utils import init_tables, clear_tables, fill_tables, drop_tables
 from relational_database.homework import \

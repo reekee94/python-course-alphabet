@@ -1,10 +1,10 @@
 import argparse
 import timeit
+
 from build_in_methods_iterators.lesson.profiler_examples.utils import \
     (
     list_comprehension,
     generator_comprehension,
-    generator_loop,
     loop_example
 )
 

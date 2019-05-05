@@ -4,5 +4,5 @@ CREATE TABLE Products (
 	SupplierID INT,
 	CategoryID INT,
 	Unit VARCHAR(255),
-	Price MONEY
+	Price DECIMAL(12,2)
 );
