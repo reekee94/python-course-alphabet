@@ -1,7 +1,7 @@
+import os
 from os import listdir
 
 import psycopg2
-import os
 from relational_database.config import FIXTURES_PATH
 
 

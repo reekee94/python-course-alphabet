@@ -1,6 +1,5 @@
-import string
 import dis
-
+import string
 
 list_1 = [x for x in string.ascii_lowercase]
 list_2 = [1 for x in string.ascii_lowercase]
