@@ -137,12 +137,22 @@ class Car:
 
 
 class Garage:
-    def __init__(self, town = TOWNS, places = 3, owner=None):
+    def __init__(self, town = town, places = 3, owner=None):
         self.town = town
         self.places = int(places)
         self.owner = uuid.uuid4()
         self.cars = []
         self.freeplace = self.places - len(self.cars)
+        
+        @property
+        def town(self):
+            return self._town
+
+        @town.setter
+        def town(self, t):
+            if t not in TOWNS:
+                raise Exception('Types must be one of: {0}.'.format(TOWNS))
+            self._town = t
 
     def __add__(self, other):
         if other not in self.cars and len(self.cars) < self.places:
