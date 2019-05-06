@@ -154,12 +154,12 @@ class Garage:
                 raise Exception('Types must be one of: {0}.'.format(TOWNS))
             self._town = t
 
-    def __add__(self, other):
+    def add_car(self, other):
         if other not in self.cars and len(self.cars) < self.places:
             self.cars.append(other)
         return self.cars
 
-     def __del__(self, other):
+     def remove_car(self, other):
          return self.cars.remove(other)
 
      def hit_hat(self):
