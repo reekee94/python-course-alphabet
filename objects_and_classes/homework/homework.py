@@ -1,6 +1,7 @@
 import uuid
 from constants import *
 from constants import CARS_TYPES, CARS_PRODUCER, TOWNS
+import random
 """
 Вам небхідно написати 3 класи. Колекціонери Гаражі та Автомобілі.
 Звязкок наступний один колекціонер може мати багато гаражів.
@@ -52,32 +53,33 @@ from constants import CARS_TYPES, CARS_PRODUCER, TOWNS
 
 
 class Cesar:
-    def __init__(self, name, garages=0, register_id):
+    def __init__(self, name, garages=None):
         self.name = str(name)
         self.garages = garages if garages is not None else []
-        self.register_id = register_id if register_id else uuid.uuid4()
+        self.register_id = uuid.uuid4()
 
     def hit_hat(self):
         return sum(g.hit_hat() for g in self.garages)
 
     def garages_count(self):
         return len(self.garages)
+
     def cars_count(self):
-        return sum(len(c.cars) for c in self.garages)
+        return sum(map(lambda garage: len(garage.cars), self.garages))
 
     def __lt__(self, other):
-        return hit_hat(self) < hit_hat(other)
+        return self.hit_hat() < other.hit_hat()
 
     def __eq__(self, other):
-        return hit_hat(self) == hit_hat(other)
+        return self.hit_hat() == other.hit_hat()
 
     def __le__(self, other):
-        return hit_hat(self) <= hit_hat(other)
+        return self.hit_hat() <= other.hit_hat()
 
     def add_car(self, car, garage=None):
         garage = garage or max(self.garages, key=lambda x: x.freeplaces)
         if garage.freeplace > 0:
-            garage.add(car)
+            garage.add_car(car)
         else:
             print('No places free places in', garage)
 
@@ -91,7 +93,6 @@ class Car:
     def __init__(self, price, type, producer, mileage):
         self.price = float(price)
         self.type = type
-
         self.producer = producer
         self.number = uuid.uuid4()
         self.mileage = float(mileage)
@@ -137,13 +138,13 @@ class Car:
 
 
 class Garage:
-    def __init__(self, town = town, places = 3, owner=None):
+    def __init__(self, town, places = 3, owner=None):
         self.town = town
         self.places = int(places)
         self.owner = uuid.uuid4()
         self.cars = []
         self.freeplace = self.places - len(self.cars)
-        
+
         @property
         def town(self):
             return self._town
@@ -154,15 +155,14 @@ class Garage:
                 raise Exception('Types must be one of: {0}.'.format(TOWNS))
             self._town = t
 
+
     def add_car(self, other):
         if other not in self.cars and len(self.cars) < self.places:
             self.cars.append(other)
         return self.cars
 
-     def remove_car(self, other):
+    def remove_car(self, other):
          return self.cars.remove(other)
 
-     def hit_hat(self):
+    def hit_hat(self):
          return sum(c.price for c in self.cars)
-
-
